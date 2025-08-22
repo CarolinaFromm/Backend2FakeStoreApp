@@ -8,6 +8,6 @@ public class Backend2FakeStoreAppApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Backend2FakeStoreAppApplication.class, args);
+        // Detached kommentar
     }
-
 }
