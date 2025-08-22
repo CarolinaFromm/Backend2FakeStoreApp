@@ -15,7 +15,14 @@ public class Product {
     private String description;
     private String category;
 
+    @Column(name = "image")
+    private String imageUrl;
+
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "rate", column = @Column(name = "rate")),
+            @AttributeOverride(name = "count", column = @Column(name = "count"))
+    })
     private Rating rating;
 
 }
