@@ -11,7 +11,7 @@ CREATE TABLE product (
 CREATE TABLE purchase (
     id SERIAL PRIMARY KEY,
     customer_id INT,
-    purchase_id INT,
+    product_id INT,
     FOREIGN KEY (customer_id) REFERENCES customer(id),
-    FOREIGN KEY (purchase_id) REFERENCES purchase(id)
+    FOREIGN KEY (product_id) REFERENCES product(id)
 )
