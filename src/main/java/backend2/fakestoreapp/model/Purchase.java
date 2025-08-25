@@ -23,6 +23,6 @@ public class Purchase {
 
     @ManyToOne
     @JoinColumn(name = "product_id", insertable = false, updatable = false)
-    private Product relatedPurchase;
+    private Product product;
 
 }

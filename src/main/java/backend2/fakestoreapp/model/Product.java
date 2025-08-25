@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -24,5 +27,8 @@ public class Product {
             @AttributeOverride(name = "count", column = @Column(name = "count"))
     })
     private Rating rating;
+
+    @OneToMany (mappedBy = "product")
+    private Set<Purchase> purchases = new HashSet<>();
 
 }
