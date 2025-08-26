@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
     public Product productDtoToEntity(ProductDTO dto) {
         return Product.builder().articleId(dto.getId()).title(dto.getTitle()).price(dto.getPrice())
                 .description(dto.getDescription()).category(dto.getCategory()).imageUrl(dto.getImage())
-                .rating(dto.getRating() != null ? ratingDtoToEntity(dto.getRating()) : null)
+                .rating(ratingDtoToEntity(dto.getRating()))
                 .build();
     }
 
