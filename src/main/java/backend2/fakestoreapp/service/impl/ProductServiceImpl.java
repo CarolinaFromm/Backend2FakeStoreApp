@@ -38,10 +38,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public RatingDTO ratingEntityToDto(Rating entity) {
-        RatingDTO dto = new RatingDTO();
-        dto.setRate(entity.getRate());
-        dto.setCount(entity.getCount());
-        return dto;
+        return RatingDTO.builder()
+                .rate(entity.getRate())
+                .count(entity.getCount())
+                .build();
     }
 
     @Override

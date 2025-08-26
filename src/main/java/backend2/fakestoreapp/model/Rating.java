@@ -10,6 +10,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class Rating {
-    public double rate;
-    public int count;
+    private double rate;
+    private int count;
 }
