@@ -7,6 +7,6 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class RatingDTO {
-    private BigDecimal rate;
+    private double rate;
     private Integer count;
 }
