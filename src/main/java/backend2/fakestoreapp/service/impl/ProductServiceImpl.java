@@ -5,15 +5,20 @@ import backend2.fakestoreapp.DTO.RatingDTO;
 import backend2.fakestoreapp.model.Product;
 import backend2.fakestoreapp.model.Rating;
 import backend2.fakestoreapp.repository.ProductRepository;
+import backend2.fakestoreapp.service.FakeStoreClient;
 import backend2.fakestoreapp.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final FakeStoreClient fakeStoreClient;
+
 
     @Override
     public Product productDtoToEntity(ProductDTO dto) {
@@ -37,5 +42,20 @@ public class ProductServiceImpl implements ProductService {
         dto.setRate(entity.getRate());
         dto.setCount(entity.getCount());
         return dto;
+    }
+
+    @Override
+    public void saveProductsFromFakeStore() {
+        if (productRepository.count() > 0) {
+            return;
+        }
+
+        List<ProductDTO> productDTOs = fakeStoreClient.getAllProducts();
+
+        List<Product> products = productDTOs.stream()
+                .map(this::productDtoToEntity)
+                .toList();
+
+        productRepository.saveAll(products);
     }
 }
