@@ -1,7 +1,6 @@
 package backend2.fakestoreapp.service;
 
 import backend2.fakestoreapp.DTO.ProductDTO;
-import backend2.fakestoreapp.config.WebClientConfig;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
