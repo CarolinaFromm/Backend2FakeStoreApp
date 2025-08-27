@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 @Setter
 public class ProductDTO {
 
+    //TODO: förklara rating DTO
+
     private Long id;
     private String title;
     private double price;

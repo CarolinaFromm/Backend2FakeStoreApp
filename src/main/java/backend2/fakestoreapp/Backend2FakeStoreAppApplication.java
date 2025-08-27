@@ -15,10 +15,10 @@ public class Backend2FakeStoreAppApplication {
         // This is a comment
     }
 
-    @Bean
-    public CommandLineRunner dataInitializer(ProductServiceImpl productServiceImpl) {
-        return args -> {
-            productServiceImpl.saveProductsFromFakeStore();
-        };
-    }
+//    @Bean
+//    public CommandLineRunner dataInitializer(ProductServiceImpl productServiceImpl) {
+//        return args -> {
+//            productServiceImpl.saveProductsFromFakeStore();
+//        };
+//    }
 }

@@ -10,5 +10,6 @@ public interface ProductService {
     public Product productDtoToEntity(ProductDTO productDTO);
     public Rating ratingDtoToEntity(RatingDTO dto);
     public RatingDTO ratingEntityToDto(Rating entity);
+
     public void saveProductsFromFakeStore();
 }

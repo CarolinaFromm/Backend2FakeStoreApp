@@ -22,8 +22,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product productDtoToEntity(ProductDTO dto) {
-        return Product.builder().articleId(dto.getId()).title(dto.getTitle()).price(dto.getPrice())
-                .description(dto.getDescription()).category(dto.getCategory()).imageUrl(dto.getImage())
+        return Product.builder()
+                .articleId(dto.getId())
+                .title(dto.getTitle())
+                .price(dto.getPrice())
+                .description(dto.getDescription())
+                .category(dto.getCategory())
+                .imageUrl(dto.getImage())
                 .rating(ratingDtoToEntity(dto.getRating()))
                 .build();
     }
@@ -44,11 +49,16 @@ public class ProductServiceImpl implements ProductService {
                 .build();
     }
 
+
     @Override
     public void saveProductsFromFakeStore() {
-        if (productRepository.count() > 0) {
-            return;
-        }
+//        if (productRepository.count() > 0) {
+//            return;
+//        }
+
+        productRepository.deleteAll();
+        productRepository.resetAutoIncrement();
+        System.out.println("Deleted all products");
 
         List<ProductDTO> productDTOs = fakeStoreClient.getAllProducts();
 
@@ -57,5 +67,6 @@ public class ProductServiceImpl implements ProductService {
                 .toList();
 
         productRepository.saveAll(products);
+        System.out.println("Saved all products");
     }
 }
