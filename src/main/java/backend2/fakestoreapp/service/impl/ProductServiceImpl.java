@@ -29,6 +29,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductDTO productEntityToDto(Product entity) {
+        return ProductDTO.builder().id(entity.getArticleId()).title(entity.getTitle()).price(entity.getPrice())
+                .description(entity.getDescription()).category(entity.getCategory()).image(entity.getImageUrl())
+                .rating(ratingEntityToDto(entity.getRating())).build();
+    }
+
+    @Override
     public Rating ratingDtoToEntity(RatingDTO dto) {
         return Rating.builder()
                 .rate(dto.getRate())
@@ -57,5 +64,10 @@ public class ProductServiceImpl implements ProductService {
                 .toList();
 
         productRepository.saveAll(products);
+    }
+
+    @Override
+    public List<ProductDTO> getAllProducts() {
+        return productRepository.findAll().stream().map(products -> productEntityToDto(products)).toList();
     }
 }
