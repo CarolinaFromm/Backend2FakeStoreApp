@@ -17,8 +17,6 @@ import java.util.List;
 @RequestMapping("/api")
 public class ProductController {
 
-    //private final FakeStoreClient fakeStoreClient;
-
     private static final Logger log = LoggerFactory.getLogger(ProductController.class);
     private final ProductService productService;
 
@@ -27,13 +25,4 @@ public class ProductController {
         log.info("Retrieving all products");
         return productService.getAllProducts();
     }
-
-    /*public ProductController(FakeStoreClient fakeStoreClient) {
-        this.fakeStoreClient = fakeStoreClient;
-    }
-
-    @GetMapping("/api/products/fakestore")
-    public List<ProductDTO> getApiProducts() {
-        return fakeStoreClient.getAllProducts();
-    }*/
 }
