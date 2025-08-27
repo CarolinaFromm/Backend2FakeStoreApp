@@ -2,22 +2,23 @@ package backend2.fakestoreapp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Getter
-@Setter
+@Builder
 public class Product {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "article_id")
-    private Integer articleId;
+    private Long articleId;
     private String title;
     private double price;
     private String description;
