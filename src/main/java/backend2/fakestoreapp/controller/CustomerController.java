@@ -1,5 +1,10 @@
 package backend2.fakestoreapp.controller;
 
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class CustomerController {
+
+
 
 }
