@@ -16,4 +16,5 @@ public interface ProductService {
 
     public void saveProductsFromFakeStore();
     public List<ProductDTO> getAllProducts();
+    public ProductDTO getProductById(Long id);
 }

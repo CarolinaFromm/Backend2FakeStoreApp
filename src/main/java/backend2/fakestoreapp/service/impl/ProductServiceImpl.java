@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -80,5 +81,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDTO> getAllProducts() {
         return productRepository.findAll().stream().map(products -> productEntityToDto(products)).toList();
+    }
+    @Override
+    public ProductDTO getProductById(Long id) {
+        return productRepository.findByArticleId(id)
+                .map(this::productEntityToDto)
+                .orElseThrow(() -> new NoSuchElementException("Produkten med ID %d hittades inte".formatted(id)));
     }
 }
