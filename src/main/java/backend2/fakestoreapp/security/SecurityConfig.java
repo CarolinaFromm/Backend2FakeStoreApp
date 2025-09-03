@@ -55,17 +55,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // förenklar under utveckling
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/login", "/register", "/api/auth/register",
+                                "/login","/register", "/api/auth/register",
                                 "/css/**", "/js/**", "/images/**",
-                                "/products/view"                  // er publika vy
+                                "/products/view", "/api/products"                  // er publika vy
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .loginPage("/login").permitAll()
-                        .defaultSuccessUrl("/products/view", true)
-                )
-                .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login?logout").permitAll())
                 .build();
     }
 }
