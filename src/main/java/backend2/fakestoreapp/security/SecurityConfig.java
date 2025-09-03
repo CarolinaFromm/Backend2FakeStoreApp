@@ -1,10 +1,10 @@
 package backend2.fakestoreapp.security;
 
-import backend2.fakestoreapp.model.Customer;
 import backend2.fakestoreapp.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -27,40 +27,69 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return raw -> {
-            String email = raw.trim().toLowerCase();
-            var customer = customerRepository.findByEmail(email)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found:" + email));
+    public UserDetailsService userDetailsService(CustomerRepository customers) {
+        return username -> customers.findByEmail(username.trim().toLowerCase())
+                .map(customer -> {
+                    var authorities = customer.getRoles().stream()
+                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
+                            .toList();
 
-            var clearance = customer.getRoles().stream()
-                    .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getName()))
-                    .collect(Collectors.toSet());
-
-            return new User(customer.getEmail(), customer.getPassword(), clearance);
-        };
+                    return  new org.springframework.security.core.userdetails.User(
+                            customer.getEmail(),
+                            customer.getPassword(),
+                            authorities
+                    );
+                })
+                .orElseThrow(() -> new UsernameNotFoundException("No user found with email: " + username));
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setPasswordEncoder(passwordEncoder);
-        authenticationProvider.setUserDetailsService(userDetailsService);
-        return authenticationProvider;
+    public AuthenticationProvider authenticationProvider(
+            UserDetailsService userDetailsService,
+            PasswordEncoder passwordEncoder) {
+
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(passwordEncoder);
+        return provider;
     }
 
     @Bean
-    public SecurityFilterChain filter(HttpSecurity http) throws Exception {
-        return http
+    public SecurityFilterChain filter(
+            HttpSecurity http,
+            AuthenticationProvider authenticationProvider) throws Exception {
+
+        http
+                .authenticationProvider(authenticationProvider)
                 .csrf(csrf -> csrf.disable()) // förenklar under utveckling
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/login","/register", "/api/auth/register",
+                                "/login",
+                                "/register",
+                                "/products",
+                                "/api/auth/register",
                                 "/css/**", "/js/**", "/images/**",
-                                "/products/view", "/api/products"                  // er publika vy
+                                "/products/view",
+                                "/api/products"                  // er publika vy
                         ).permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
-                .build();
+
+                .formLogin(login -> login
+                        .loginPage("/login")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/products", true)
+                        .permitAll()
+                )
+
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout")
+                        .permitAll()
+                );
+
+        return http.build();
     }
 }

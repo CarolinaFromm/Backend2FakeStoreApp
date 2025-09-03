@@ -11,8 +11,6 @@ import java.math.BigDecimal;
 @Builder
 public class ProductDTO {
 
-    //TODO: förklara rating DTO
-
     private Long id;
     private String title;
     private double price;
