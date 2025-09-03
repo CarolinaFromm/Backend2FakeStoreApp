@@ -23,4 +23,8 @@ public class ProductViewController {
         model.addAttribute("product", productService.getProductById(id));
         return "showProduct";
     }
+    @GetMapping("/aboutUs")
+    public String showAboutUs(Model model) {
+        return "aboutUs";
+    }
 }
