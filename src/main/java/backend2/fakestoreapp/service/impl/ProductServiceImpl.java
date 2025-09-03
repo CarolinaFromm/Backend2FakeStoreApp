@@ -84,8 +84,9 @@ public class ProductServiceImpl implements ProductService {
     }
     @Override
     public ProductDTO getProductById(Long id) {
-        return productRepository.findByArticleId(id)
-                .map(this::productEntityToDto)
-                .orElseThrow(() -> new NoSuchElementException("Produkten med ID %d hittades inte".formatted(id)));
+        return productRepository.findById(id)
+            .map(this::productEntityToDto)
+            .orElseThrow(() -> new NoSuchElementException("Produkten med ID %d hittades inte".formatted(id)));
     }
+
 }
