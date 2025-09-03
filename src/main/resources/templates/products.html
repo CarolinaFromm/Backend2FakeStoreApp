@@ -42,6 +42,7 @@
             <div class="price">
                 <span th:text="${p.price}">0.00</span> €
             </div>
+            <div class="rating-stars" th:style="'--rating: ' + ${p.rating.rate}"></div>
             <a class="btn" th:href="@{/products/{id}(id=${p.id})}" type="button">KÖP</a>
         </div>
     </div>
