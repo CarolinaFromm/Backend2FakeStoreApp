@@ -1,6 +1,7 @@
 package backend2.fakestoreapp.controller;
 
 import backend2.fakestoreapp.DTO.CustomerRegistrationDTO;
+import backend2.fakestoreapp.DTO.LoginDTO;
 import backend2.fakestoreapp.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RequiredArgsConstructor
 @Controller

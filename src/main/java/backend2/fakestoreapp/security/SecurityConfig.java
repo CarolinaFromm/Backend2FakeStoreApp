@@ -59,7 +59,19 @@ public class SecurityConfig {
                                 "/css/**", "/js/**", "/images/**",
                                 "/products/view", "/api/products"                  // er publika vy
                         ).permitAll()
+                        .requestMatchers("/admin/orders/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/")
+                        .failureUrl("/login?error=true")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout=true")
+                        .permitAll()
                 )
                 .build();
     }
