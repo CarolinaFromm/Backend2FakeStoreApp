@@ -24,7 +24,6 @@ body {
 h1 {
     text-align:center;
     margin: 8px 0 24px;
-    text-decoration: underline;
 }
 
 .grid {
@@ -40,6 +39,9 @@ h1 {
     padding:18px;
     text-align:center;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card img {
@@ -68,13 +70,69 @@ h1 {
     color:var(--ink);
     border:1px solid var(--ink);
     border-radius:10px;
-    padding:10px 18px;
+    padding:8px 16px;
     cursor:pointer;
     transition: transform 0.1s ease-in-out;
 }
 
 .btn:hover {
-    background:#111;
+    background:#132636;
     color:#fff;
     transform: translateY(-1px);
+}
+
+.rating-stars {
+    --rating: 0;
+    --percent: calc(var(--rating) / 5 * 100%);
+    margin-bottom: 12px;
+    display: inline-block;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: 2px;
+}
+
+.rating-stars::before {
+    content: "★★★★★";
+    background: linear-gradient(90deg, gold var(--percent), #ccc var(--percent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+.custom-navbar {
+    background: linear-gradient(90deg, #132636, #1CC88A);
+    border-radius: 0 0 1rem 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    padding: 1rem;
+}
+
+.custom-navbar .navbar-brand {
+    color: white;
+    font-weight: 700;
+}
+
+.custom-navbar .nav-link {
+    color: white;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.custom-navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    left: 0;
+    bottom: -3px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+.custom-navbar .nav-link:hover {
+    color: #132636;
+}
+
+.custom-navbar .nav-link:hover::after {
+    width: 100%;
 }

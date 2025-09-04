@@ -23,7 +23,6 @@ public class Product {
     private double price;
     private String description;
     private String category;
-
     @Column(name = "image")
     private String imageUrl;
 
