@@ -14,9 +14,54 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
-<h1 class="text-center"> HAHAHAH <br> DET KAN DU INTE</h1>
-<h1>🤪</h1>
-<br><br>
+<nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand mx-auto fs-3 fw-bold" th:href="@{/products}">FakeStore</a>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav gap-3">
+                <li class="nav-item">
+                    <a class="nav-link hover-link" th:href="@{/login}">Logga in</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link hover-link" th:href="@{/aboutUs}">Kontakta oss</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="map-container">
+                <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4068.5201966663426!2d18.02075517727271!3d59.345306009741634!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465f9d9d263b022d%3A0x82fc0f30ed84f9ed!2sNackademin!5e0!3m2!1ssv!2sse!4v1744021556746!5m2!1ssv!2sse"
+                        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+        <div class="col-12 col-md-3 mt-4 mt-md-0">
+            <h2>Kontakta oss</h2>
+            <br>
+            <h5>Hitta hit</h5>
+            <address>
+                Tomtebodavägen 3A<br>
+                171 65 Solna
+            </address>
+            <br>
+            <h5>Kontakta oss</h5>
+            <p>
+                +46(0)7012312345<br>
+                webshop@mail.com
+            </p>
+        </div>
+    </div>
+</div>
 <a class="btn" th:href="@{/products}">Tillbaka</a>
 
 </body>
