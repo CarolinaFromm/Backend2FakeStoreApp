@@ -13,8 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.util.stream.Collectors;
-
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -61,7 +59,7 @@ public class SecurityConfig {
 
         http
                 .authenticationProvider(authenticationProvider)
-                .csrf(csrf -> csrf.disable()) // förenklar under utveckling
+                .csrf(csrf -> csrf.disable()) // TA BORT SENARE!
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/login",
@@ -70,7 +68,7 @@ public class SecurityConfig {
                                 "/api/auth/register",
                                 "/css/**", "/js/**", "/images/**",
                                 "/products/view",
-                                "/api/products"                  // er publika vy
+                                "/api/products"
                         ).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()

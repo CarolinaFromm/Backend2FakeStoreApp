@@ -10,6 +10,7 @@ public class Backend2FakeStoreAppApplication {
         SpringApplication.run(Backend2FakeStoreAppApplication.class, args);
         // Det här är en uppdaterad version av master.
         // This is a comment
+        // This is also a comment.
     }
 
 }
