@@ -43,14 +43,13 @@
 
 <form th:action="@{/login}" method="post" style="max-width:420px">
     <li>
-        <label for="username">Username</label>
-        <input id="username" type="text" required>
+    <label>E-post</label>
+    <input type="text" name="username" required>
     </li>
     <li>
-        <label for="password">Password</label>
-        <input id="password" type="text" required>
+    <label>Lösenord</label>
+    <input type="password" name="password" required>
     </li>
-
     <button class="btn" type="submit" style="margin-top:12px">Logga in</button>
 </form>
 
