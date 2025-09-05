@@ -36,4 +36,15 @@ public class Product {
     @OneToMany (mappedBy = "product")
     private Set<Purchase> purchases = new HashSet<>();
 
+    public Product(Long id, Long articleId, String title, double price, String description,
+                   String category, String imageUrl, Rating rating) {
+        this.id = id;
+        this.articleId = articleId;
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.category = category;
+        this.imageUrl = imageUrl;
+        this.rating = rating;
+    }
 }
