@@ -15,13 +15,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@SpringBootTest
 public class ProductServiceImplTest {
 
     @Mock
@@ -76,5 +76,19 @@ public class ProductServiceImplTest {
         List<ProductDTO> actual = service2.getAllProducts();
 
         assertEquals(1, actual.size(), "Should be the same size");
+    }
+
+    //TODO använda productEntity.getArticleID?
+    @Test
+    void getProductById() {
+        when(productRepositoryMock.findById(productEntity.getId()))
+                .thenReturn(Optional.of(productEntity));
+
+        ProductServiceImpl service2 = new ProductServiceImpl(productRepositoryMock, fakeStoreClientMock);
+
+        ProductDTO actual = service2.getProductById(productEntity.getArticleId());
+
+        assertEquals(productEntity.getArticleId(), actual.getId(),
+                "Returned DTO id should match entity id");
     }
 }

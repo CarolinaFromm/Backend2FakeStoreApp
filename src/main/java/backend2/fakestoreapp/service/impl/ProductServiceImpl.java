@@ -82,6 +82,8 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDTO> getAllProducts() {
         return productRepository.findAll().stream().map(products -> productEntityToDto(products)).toList();
     }
+
+    //TODO ändra till article_ID?
     @Override
     public ProductDTO getProductById(Long id) {
         return productRepository.findById(id)
