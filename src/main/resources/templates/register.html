@@ -2,14 +2,8 @@
 <html lang="sv" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"><title>Ny användare</title>
+    <title>Ny användare</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <style>
-        .form-list { list-style: none; padding-left: 0; max-width: 520px; }
-        .form-list li { margin: 10px 0 14px; }
-        .form-list label::before { content: "- "; }
-        .form-list label { display: block; font-weight: 600; margin-bottom: 6px; }
-        .form-list input { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border); }
-    </style>
 </head>
 <body class="container">
 <h1>Registrera ny kund</h1>
@@ -23,27 +17,46 @@
             <input id="name" type="text" th:field="*{name}" required>
             <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
         </li>
+
         <li>
             <label for="address">Adress</label>
             <input id="address" type="text" th:field="*{address}">
             <p class="error" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
         </li>
+
         <li>
             <label for="phone">Telefon</label>
             <input id="phone" type="text" th:field="*{phone}">
             <p class="error" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></p>
         </li>
+
         <li>
             <label for="email">E-post</label>
             <input id="email" type="email" th:field="*{email}" required>
             <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
         </li>
+
         <li>
             <label for="password">Lösenord</label>
             <input id="password" type="password" th:field="*{password}" required>
             <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
         </li>
+
+        <li class="role-row">
+            <label>Roll</label>
+
+            <label class="radio">
+                <input type="radio" th:field="*{role}" value="user"> Användare
+            </label>
+
+            <label class="radio">
+                <input type="radio" th:field="*{role}" value="admin"> Admin
+            </label>
+
+            <p class="error" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></p>
+        </li>
     </ul>
+
     <button class="btn" type="submit">Skapa konto</button>
 </form>
 

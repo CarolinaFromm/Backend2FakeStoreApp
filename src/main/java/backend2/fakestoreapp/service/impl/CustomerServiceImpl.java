@@ -23,23 +23,25 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     @Override
     public CustomerResponseDTO register(CustomerRegistrationDTO dto) {
+        String email = dto.getEmail().trim().toLowerCase();
         if (customerRepository.existsByEmail(dto.getEmail())) {
-            throw new IllegalArgumentException("Email already exists");
+            throw new IllegalArgumentException("E-postadressen är redan registrerad.");
         }
 
-        Role userRole = roleRepository.
-                findByName("user")
-                .orElseThrow(() -> new IllegalArgumentException("User-role 'user' does not exist"));
+        Customer customer = new Customer();
+        customer.setName(dto.getName());
+        customer.setAddress(dto.getAddress());
+        customer.setPhone(dto.getPhone());
+        customer.setEmail(dto.getEmail());
+        customer.setPassword(passwordEncoder.encode(dto.getPassword()));
 
-        Customer c = new Customer();
-        c.setName(dto.getName());
-        c.setAddress(dto.getAddress());
-        c.setEmail(dto.getEmail());
-        c.setPhone(dto.getPhone());
-        c.setPassword(passwordEncoder.encode(dto.getPassword()));
-        c.getRoles().add(userRole);
+        String selected = dto.getRole() == null ? "user" : dto.getRole().toLowerCase();
+        Role role = roleRepository.findByName(selected)
+                .orElseThrow(() -> new IllegalArgumentException("Rollen " + selected + "finns inte."));
 
-        Customer saved = customerRepository.save(c);
+        customer.getRoles().add(role);
+
+        Customer saved = customerRepository.save(customer);
 
         CustomerResponseDTO result = new CustomerResponseDTO();
         result.setId(saved.getId());

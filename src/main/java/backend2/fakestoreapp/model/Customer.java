@@ -29,9 +29,17 @@ public class Customer {
     @JoinTable(
             name = "customer_roles",
             joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set <Role> roles = new HashSet<>();
 
+    // Säkerställer att mejladress blir små@bokstäver.com - så unique blir relevant.
+    // Finns toLowerCase på andra ställen, men flera safeguards är bra!
+    @PrePersist
+    @PreUpdate
+    private void normalizeEmail() {
+        if (email != null) {
+            email = email.trim().toLowerCase();
+        }
+    }
 
 }

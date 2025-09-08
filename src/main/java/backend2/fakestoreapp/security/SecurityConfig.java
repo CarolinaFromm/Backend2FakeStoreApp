@@ -20,8 +20,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final CustomerRepository customerRepository;
-
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -32,7 +30,7 @@ public class SecurityConfig {
         return username -> customers.findByEmail(username.trim().toLowerCase())
                 .map(customer -> {
                     var authorities = customer.getRoles().stream()
-                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName()))
+                            .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().trim().toLowerCase()))
                             .toList();
 
                     return  new org.springframework.security.core.userdetails.User(
@@ -74,7 +72,7 @@ public class SecurityConfig {
                                 "/api/products",
                                 "/aboutUs"
                         ).permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("admin")
                         .anyRequest().authenticated()
                 )
 

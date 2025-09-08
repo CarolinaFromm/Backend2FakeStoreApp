@@ -1,7 +1,6 @@
 package backend2.fakestoreapp.controller;
 
 import backend2.fakestoreapp.DTO.CustomerRegistrationDTO;
-import backend2.fakestoreapp.DTO.LoginDTO;
 import backend2.fakestoreapp.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @RequiredArgsConstructor
 @Controller
@@ -21,8 +19,10 @@ public class AuthenticationController {
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
-        model.addAttribute("customer", new CustomerRegistrationDTO());
-        return "createNew";
+        if (!model.containsAttribute("customer")) {
+            model.addAttribute("customer", new CustomerRegistrationDTO());
+        }
+        return "register";
     }
 
     @PostMapping("/register")
@@ -32,7 +32,7 @@ public class AuthenticationController {
             Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "createNew";
+            return "register";
         }
 
         try {
@@ -40,7 +40,7 @@ public class AuthenticationController {
             return "redirect:/login?registered";
         } catch (IllegalArgumentException ex) {
             model.addAttribute("error", ex.getMessage());
-            return "createNew";
+            return "register";
         }
     }
 

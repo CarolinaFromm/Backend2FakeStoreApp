@@ -136,3 +136,52 @@ h1 {
 .custom-navbar .nav-link:hover::after {
     width: 100%;
 }
+
+/* REGISTERFORM */
+.form-list{
+    list-style: none;
+    padding: 0;
+    max-width: 520px;
+}
+
+.form-list > li {
+    margin:10px 0 14px;
+}
+
+.form-list > li > label::before { content: "- "; }
+.form-list > li > label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.form-list input[type="text"],
+.form-list input[type="email"],
+.form-list input[type="password"],
+.form-list input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+/* RADIOKNAPPAR */
+.role-row { margin-top: 10px; }
+
+.form-list label.radio {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 400;
+    margin-right: 16px;
+    margin-bottom: 0;
+}
+.form-list label.radio::before { content: none; }
+
+.form-list input[type="radio"] { width: auto; }
+
+.form-list .error {
+    color: #d33;
+    font-size: 0.9rem;
+    margin-top: 6px;
+}

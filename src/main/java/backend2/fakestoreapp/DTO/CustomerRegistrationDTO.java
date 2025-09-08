@@ -39,4 +39,7 @@ public class CustomerRegistrationDTO {
             message = "Lösenord måste innehålla minst en bokstav och en siffra."
     )
     private String password;
+
+    @Pattern(regexp = "user|admin", message = "Ogiltig roll")
+    private String role = "user";
 }
