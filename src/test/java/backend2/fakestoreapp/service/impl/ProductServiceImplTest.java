@@ -41,32 +41,35 @@ public class ProductServiceImplTest {
             "electronics", "http://example.com/image.jpg",
             new RatingDTO(4.5, 100));
 
+    private void assertProductEquals(Product entity, ProductDTO dto) {
+        assertEquals(entity.getArticleId(), dto.getId(), "ID should match");
+        assertEquals(entity.getTitle(), dto.getTitle(), "Title should match");
+        assertEquals(entity.getPrice(), dto.getPrice(), "Price should match");
+        assertEquals(entity.getDescription(), dto.getDescription(), "Description should match");
+        assertEquals(entity.getCategory(), dto.getCategory(), "Category should match");
+        assertEquals(entity.getImageUrl(), dto.getImage(), "Image should match");
+        assertEquals(entity.getRating().getRate(), dto.getRating().getRate(), "Rating rate should match");
+        assertEquals(entity.getRating().getCount(), dto.getRating().getCount(), "Rating count should match");
+    }
+
     @Test
     void productEntityToDto() {
         ProductDTO actual = productServiceImpl.productEntityToDto(productEntity);
-
-        assertEquals(productEntity.getArticleId(), actual.getId(), "Should be the same id");
-        assertEquals(productEntity.getTitle(), actual.getTitle(), "Should be the same title");
-        assertEquals(productEntity.getPrice(), actual.getPrice(), "Should be the same price");
-        assertEquals(productEntity.getDescription(), actual.getDescription(), "Should be the same description");
-        assertEquals(productEntity.getCategory(), actual.getCategory(), "Should be the same category");
-        assertEquals(productEntity.getImageUrl(), actual.getImage(), "Should be the same image");
-        assertEquals(productEntity.getRating().getRate(), actual.getRating().getRate(), "Should be the same rating");
-        assertEquals(productEntity.getRating().getCount(), actual.getRating().getCount(), "Should be the same count");
+        assertProductEquals(productEntity, actual);
     }
 
     @Test
     void productDtoToEntity() {
         Product actual = productServiceImpl.productDtoToEntity(productDTO);
 
-        assertEquals(productDTO.getId(), actual.getArticleId(), "Should be the same id");
-        assertEquals(productDTO.getTitle(), actual.getTitle(), "Should be the same title");
-        assertEquals(productDTO.getPrice(), actual.getPrice(), "Should be the same price");
-        assertEquals(productDTO.getDescription(), actual.getDescription(), "Should be the same description");
-        assertEquals(productDTO.getCategory(), actual.getCategory(), "Should be the same category");
-        assertEquals(productDTO.getImage(), actual.getImageUrl(), "Should be the same image");
-        assertEquals(productDTO.getRating().getRate(), actual.getRating().getRate(), "Should be the same rating");
-        assertEquals(productDTO.getRating().getCount(), actual.getRating().getCount(), "Should be the same count");
+        assertEquals(productDTO.getId(), actual.getArticleId());
+        assertEquals(productDTO.getTitle(), actual.getTitle());
+        assertEquals(productDTO.getPrice(), actual.getPrice());
+        assertEquals(productDTO.getDescription(), actual.getDescription());
+        assertEquals(productDTO.getCategory(), actual.getCategory());
+        assertEquals(productDTO.getImage(), actual.getImageUrl());
+        assertEquals(productDTO.getRating().getRate(), actual.getRating().getRate());
+        assertEquals(productDTO.getRating().getCount(), actual.getRating().getCount());
     }
 
     @Test
@@ -85,14 +88,7 @@ public class ProductServiceImplTest {
 
         ProductDTO actual = productServiceImpl.getProductById(productEntity.getId());
 
-        assertEquals(productEntity.getArticleId(), actual.getId(), "Returned DTO id should match entity article id");
-        assertEquals(productEntity.getTitle(), actual.getTitle(), "Returned DTO title should match entity title");
-        assertEquals(productEntity.getPrice(), actual.getPrice(), "Returned DTO price should match entity price");
-        assertEquals(productEntity.getDescription(), actual.getDescription(), "Returned DTO description should match entity description");
-        assertEquals(productEntity.getCategory(), actual.getCategory(), "Returned DTO category should match entity category");
-        assertEquals(productEntity.getImageUrl(), actual.getImage(), "Returned DTO image should match entity image");
-        assertEquals(productEntity.getRating().getRate(), actual.getRating().getRate(), "Returned DTO rating rate should match entity rating rate");
-        assertEquals(productEntity.getRating().getCount(), actual.getRating().getCount(), "Returned DTO rating count should match entity rating count");
+        assertProductEquals(productEntity, actual);
     }
 
     @Test
