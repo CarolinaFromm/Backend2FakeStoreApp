@@ -136,3 +136,13 @@ h1 {
 .custom-navbar .nav-link:hover::after {
     width: 100%;
 }
+a {
+    text-decoration: none;
+    color: #132636;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #1CC88A;
+}
