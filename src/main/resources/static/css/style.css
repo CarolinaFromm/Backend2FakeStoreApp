@@ -146,3 +146,58 @@ a {
 a:hover {
     color: #1CC88A;
 }
+
+.square-card {
+    aspect-ratio: 1 / 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.github-header {
+    position: static;
+    background: transparent;
+    border: 0;
+    padding: 12px 0 0;
+    display: flex;
+    justify-content: center;
+}
+.github-header img {
+    width: 120px;
+    height: 120px;
+}
+.github-body {
+    position: static;
+    flex: 1 1 auto;
+    margin-top: 12px;
+    padding: 0 16px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow: auto;
+}
+.auth-card {
+    max-width: 420px;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.auth-card h3 {
+    font-weight: 700;
+    color: var(--ink);
+}
+.theme-input {
+    border-radius: .6rem;
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+}
+.theme-input:focus {
+    border-color: #1CC88A;
+    box-shadow: 0 0 0 .2rem rgba(28, 200, 138, 0.25);
+}
+.invalid-feedback {
+    font-size: 0.9rem;
+}
