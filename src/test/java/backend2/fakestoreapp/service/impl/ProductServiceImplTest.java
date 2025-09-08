@@ -15,10 +15,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -72,23 +72,41 @@ public class ProductServiceImplTest {
     @Test
     void getAllProducts() {
         when(productRepositoryMock.findAll()).thenReturn(Arrays.asList(productEntity));
-        ProductServiceImpl service2 = new ProductServiceImpl(productRepositoryMock, fakeStoreClientMock);
-        List<ProductDTO> actual = service2.getAllProducts();
+
+        List<ProductDTO> actual = productServiceImpl.getAllProducts();
 
         assertEquals(1, actual.size(), "Should be the same size");
     }
 
-    //TODO använda productEntity.getArticleID?
     @Test
-    void getProductById() {
+    void getProductById_found() {
         when(productRepositoryMock.findById(productEntity.getId()))
                 .thenReturn(Optional.of(productEntity));
 
-        ProductServiceImpl service2 = new ProductServiceImpl(productRepositoryMock, fakeStoreClientMock);
+        ProductDTO actual = productServiceImpl.getProductById(productEntity.getId());
 
-        ProductDTO actual = service2.getProductById(productEntity.getArticleId());
+        assertEquals(productEntity.getArticleId(), actual.getId(), "Returned DTO id should match entity article id");
+        assertEquals(productEntity.getTitle(), actual.getTitle(), "Returned DTO title should match entity title");
+        assertEquals(productEntity.getPrice(), actual.getPrice(), "Returned DTO price should match entity price");
+        assertEquals(productEntity.getDescription(), actual.getDescription(), "Returned DTO description should match entity description");
+        assertEquals(productEntity.getCategory(), actual.getCategory(), "Returned DTO category should match entity category");
+        assertEquals(productEntity.getImageUrl(), actual.getImage(), "Returned DTO image should match entity image");
+        assertEquals(productEntity.getRating().getRate(), actual.getRating().getRate(), "Returned DTO rating rate should match entity rating rate");
+        assertEquals(productEntity.getRating().getCount(), actual.getRating().getCount(), "Returned DTO rating count should match entity rating count");
+    }
 
-        assertEquals(productEntity.getArticleId(), actual.getId(),
-                "Returned DTO id should match entity id");
+    @Test
+    void getProductById_notFound() {
+        Long missingId = 999L;
+        when(productRepositoryMock.findById(missingId)).thenReturn(Optional.empty());
+
+        NoSuchElementException exception = assertThrows(
+                NoSuchElementException.class,
+                () -> productServiceImpl.getProductById(missingId),
+                "Should throw NoSuchElementException if product not found"
+        );
+
+        assertEquals("Produkten med ID 999 hittades inte", exception.getMessage(),
+                "Exception message should match the expected format");
     }
 }
