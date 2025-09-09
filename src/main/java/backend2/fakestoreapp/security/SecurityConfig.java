@@ -2,6 +2,7 @@ package backend2.fakestoreapp.security;
 
 import backend2.fakestoreapp.model.Customer;
 import backend2.fakestoreapp.repository.CustomerRepository;
+import org.springframework.http.HttpMethod;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +14,6 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import java.util.stream.Collectors;
 
 @Configuration
 @RequiredArgsConstructor
@@ -62,8 +61,9 @@ public class SecurityConfig {
                 .authenticationProvider(authenticationProvider)
                 .csrf(csrf -> csrf.disable()) // TA BORT SENARE!
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login").anonymous()
+                        .requestMatchers(HttpMethod.POST, "/login").anonymous()
                         .requestMatchers(
-                                "/login",
                                 "/register",
                                 "/products/**",
                                 "/api/auth/register",
@@ -80,7 +80,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/products", true)
+                        .defaultSuccessUrl("/profile", true)
                         .permitAll()
                 )
 

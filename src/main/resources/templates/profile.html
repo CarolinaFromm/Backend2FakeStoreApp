@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="sv" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mina ordrar</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="container">
+<h1>Mina ordrar</h1>
+
+<p th:if="${currentCustomer != null}">
+    Inloggad som <strong th:text="${currentCustomer.name}">Namn</strong>
+    (<span th:text="${currentCustomer.email}">epost</span>)
+</p>
+
+<div th:if="${#lists.isEmpty(orders)}">
+    Du har inga ordrar ännu.
+</div>
+
+<div th:if="${!#lists.isEmpty(orders)}" class="grid">
+    <div class="card" th:each="o : ${orders}">
+        <div class="title" th:text="${o.product.title}">Produkt</div>
+        <p class="price" th:text="${o.product.price} + ' kr'">0.00 kr</p>
+        <p>Beställd: <span th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd HH:mm')}">tid</span></p>
+    </div>
+</div>
+
+<p style="margin-top:16px">
+    <a class="nav-link" th:href="@{/products}">&larr; Till produkterna</a>
+</p>
+</body>
+</html>
