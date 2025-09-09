@@ -83,18 +83,14 @@
                 <div class="invalid-feedback d-block"
                      th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
             </div>
-            <div>
+            <div class="mb-4">
                 <li class="role-row">
-                    <label>Roll</label>
-
                     <label class="radio">
                         <input type="radio" th:field="*{role}" value="user"> Användare
                     </label>
-
                     <label class="radio">
                         <input type="radio" th:field="*{role}" value="admin"> Admin
                     </label>
-
                     <p class="error" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></p>
                 </li>
             </div>
