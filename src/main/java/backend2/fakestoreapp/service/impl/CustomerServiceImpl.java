@@ -32,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
         customer.setName(dto.getName());
         customer.setAddress(dto.getAddress());
         customer.setPhone(dto.getPhone());
-        customer.setEmail(dto.getEmail());
+        customer.setEmail(email);
         customer.setPassword(passwordEncoder.encode(dto.getPassword()));
 
         String selected = dto.getRole() == null ? "user" : dto.getRole().toLowerCase();
