@@ -1,6 +1,6 @@
 package backend2.fakestoreapp;
 
-import backend2.fakestoreapp.DTO.PurchaseRegistrationDTO;
+import backend2.fakestoreapp.DTO.PurchaseDto;
 import backend2.fakestoreapp.controller.PurchaseController;
 import backend2.fakestoreapp.service.impl.PurchaseServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +31,7 @@ class PurchaseControllerTest {
 
     @Test
     void createPurchase_WhenAuthenticated_ShouldExtractEmailCorrectly() {
-        PurchaseRegistrationDTO purchaseDTO = new PurchaseRegistrationDTO();
+        PurchaseDto purchaseDTO = new PurchaseDto();
         String expectedEmail = "test@example.com";
 
         when(authentication.isAuthenticated()).thenReturn(true);
@@ -45,7 +45,7 @@ class PurchaseControllerTest {
 
     @Test
     void createPurchase_WhenNotAuthenticated_ShouldNotCallService() {
-        PurchaseRegistrationDTO purchaseDTO = new PurchaseRegistrationDTO();
+        PurchaseDto purchaseDTO = new PurchaseDto();
         when(authentication.isAuthenticated()).thenReturn(false);
 
         String result = purchaseController.createPurchase(purchaseDTO, authentication);

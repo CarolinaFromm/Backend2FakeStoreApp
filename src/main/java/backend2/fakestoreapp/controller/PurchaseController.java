@@ -1,6 +1,6 @@
 package backend2.fakestoreapp.controller;
 
-import backend2.fakestoreapp.DTO.PurchaseRegistrationDTO;
+import backend2.fakestoreapp.DTO.PurchaseDto;
 import backend2.fakestoreapp.service.impl.PurchaseServiceImpl;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -17,11 +17,11 @@ public class PurchaseController {
     }
 
     @PostMapping("/checkout")
-    public String createPurchase(@ModelAttribute ("purchase") PurchaseRegistrationDTO purchaseRegistrationDTO, Authentication authentication){
+    public String createPurchase(@ModelAttribute ("purchase") PurchaseDto purchaseDto, Authentication authentication){
 
         if (authentication != null && authentication.isAuthenticated()) {
             String email = authentication.getName();
-            purchaseServiceImpl.createPurchase(purchaseRegistrationDTO, email);
+            purchaseServiceImpl.createPurchase(purchaseDto, email);
             return "redirect:/profile";
         }
 

@@ -1,6 +1,6 @@
 package backend2.fakestoreapp.service.impl;
 
-import backend2.fakestoreapp.DTO.PurchaseRegistrationDTO;
+import backend2.fakestoreapp.DTO.PurchaseDto;
 import backend2.fakestoreapp.model.Customer;
 import backend2.fakestoreapp.model.Product;
 import backend2.fakestoreapp.model.Purchase;
@@ -36,7 +36,7 @@ public class PurchaseServiceImpTest {
     @InjectMocks
     private PurchaseServiceImpl purchaseService;
 
-    private PurchaseRegistrationDTO purchaseDTO;
+    private PurchaseDto purchaseDTO;
     private Product product;
     private Customer customer;
     private String customerEmail;
@@ -45,7 +45,7 @@ public class PurchaseServiceImpTest {
     void setUp() {
         customerEmail = "test@example.com";
 
-        purchaseDTO = new PurchaseRegistrationDTO();
+        purchaseDTO = new PurchaseDto();
         purchaseDTO.setProduct_article_id(1L);
 
         product = new Product();

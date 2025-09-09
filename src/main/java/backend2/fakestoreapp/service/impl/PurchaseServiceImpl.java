@@ -1,6 +1,6 @@
 package backend2.fakestoreapp.service.impl;
 
-import backend2.fakestoreapp.DTO.PurchaseRegistrationDTO;
+import backend2.fakestoreapp.DTO.PurchaseDto;
 import backend2.fakestoreapp.model.Purchase;
 import backend2.fakestoreapp.repository.CustomerRepository;
 import backend2.fakestoreapp.repository.ProductRepository;
@@ -9,7 +9,6 @@ import backend2.fakestoreapp.service.PurchaseService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.NoSuchElementException;
 
 
@@ -26,9 +25,9 @@ public class PurchaseServiceImpl implements PurchaseService {
         this.customerRepository = customerRepository;
     }
 
-    public void createPurchase(PurchaseRegistrationDTO purchaseRegistrationDTO, String email) {
+    public void createPurchase(PurchaseDto purchaseDto, String email) {
 
-        var product = productRepository.findByArticleId(purchaseRegistrationDTO.getProduct_article_id())
+        var product = productRepository.findByArticleId(purchaseDto.getProduct_article_id())
                 .orElseThrow(() -> new NoSuchElementException("Product not found"));
 
         var customer = customerRepository.findByEmail(email)
@@ -39,5 +38,9 @@ public class PurchaseServiceImpl implements PurchaseService {
         purchase.setProduct(product);
         purchase.setCreatedAt(LocalDateTime.now());
         purchaseRepository.save(purchase);
+    }
+
+    public void deletePurchase(Long id) {
+        purchaseRepository.deleteById(id);
     }
 }
