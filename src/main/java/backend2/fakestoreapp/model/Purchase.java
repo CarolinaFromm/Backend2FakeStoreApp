@@ -17,7 +17,7 @@ public class Purchase {
     @Column(name = "customer_id")
     private Long customerId;
 
-    @Column(name = "product_id")
+    @Column(name = "product_article_id")
     private Long productId;
 
     @Column(name = "created_at", updatable = false)
@@ -30,7 +30,7 @@ public class Purchase {
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    @JoinColumn(name = "product_article_id", insertable = false, updatable = false)
     private Product product;
 
 }
