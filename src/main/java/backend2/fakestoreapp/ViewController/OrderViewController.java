@@ -1,0 +1,18 @@
+package backend2.fakestoreapp.ViewController;
+
+import backend2.fakestoreapp.service.PurchaseService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+@RequiredArgsConstructor
+public class OrderViewController {
+    private final PurchaseService cartService;
+
+    @GetMapping("/orders")
+    public String showOrders(Model model){
+        return "orders";
+    }
+}
