@@ -11,6 +11,7 @@ public class Backend2FakeStoreAppApplication {
         // Det här är en uppdaterad version av master.
         // This is a comment
         // This is also a comment.
+        // This too
     }
 
 }
