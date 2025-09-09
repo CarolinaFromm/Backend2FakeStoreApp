@@ -9,9 +9,7 @@ public class Backend2FakeStoreAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(Backend2FakeStoreAppApplication.class, args);
         // Det här är en uppdaterad version av master.
-        // This is a comment
-        // This is also a comment.
-        // This too
+        // I just deleted comments, tihihihi.
     }
 
 }
