@@ -1,6 +1,6 @@
 package backend2.fakestoreapp.service.impl;
 
-import backend2.fakestoreapp.DTO.PurchaseDto;
+import backend2.fakestoreapp.DTO.PurchaseRegistrationDto;
 import backend2.fakestoreapp.model.Customer;
 import backend2.fakestoreapp.model.Product;
 import backend2.fakestoreapp.model.Purchase;
@@ -36,7 +36,7 @@ public class PurchaseServiceImpTest {
     @InjectMocks
     private PurchaseServiceImpl purchaseService;
 
-    private PurchaseDto purchaseDTO;
+    private PurchaseRegistrationDto purchaseRegistrationDTO;
     private Product product;
     private Customer customer;
     private String customerEmail;
@@ -45,8 +45,8 @@ public class PurchaseServiceImpTest {
     void setUp() {
         customerEmail = "test@example.com";
 
-        purchaseDTO = new PurchaseDto();
-        purchaseDTO.setProduct_article_id(1L);
+        purchaseRegistrationDTO = new PurchaseRegistrationDto();
+        purchaseRegistrationDTO.setProduct_article_id(1L);
 
         product = new Product();
         product.setArticleId(1L);
@@ -60,7 +60,7 @@ public class PurchaseServiceImpTest {
         when(productRepository.findByArticleId(1L)).thenReturn(Optional.of(product));
         when(customerRepository.findByEmail(customerEmail)).thenReturn(Optional.of(customer));
 
-        purchaseService.createPurchase(purchaseDTO, customerEmail);
+        purchaseService.createPurchase(purchaseRegistrationDTO, customerEmail);
 
         ArgumentCaptor<Purchase> purchaseCaptor = ArgumentCaptor.forClass(Purchase.class);
 
@@ -79,7 +79,7 @@ public class PurchaseServiceImpTest {
         when(productRepository.findByArticleId(1L)).thenReturn(Optional.empty());
 
         assertThrows(NoSuchElementException.class, () ->
-                purchaseService.createPurchase(purchaseDTO, customerEmail));
+                purchaseService.createPurchase(purchaseRegistrationDTO, customerEmail));
 
         verify(purchaseRepository, never()).save(any(Purchase.class));
     }
@@ -90,7 +90,7 @@ public class PurchaseServiceImpTest {
         when(customerRepository.findByEmail(customerEmail)).thenReturn(Optional.empty());
 
         assertThrows(NoSuchElementException.class, () ->
-                purchaseService.createPurchase(purchaseDTO, customerEmail));
+                purchaseService.createPurchase(purchaseRegistrationDTO, customerEmail));
 
         verify(purchaseRepository, never()).save(any(Purchase.class));
     }

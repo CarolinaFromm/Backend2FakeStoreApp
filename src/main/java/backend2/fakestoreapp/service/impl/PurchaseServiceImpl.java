@@ -1,6 +1,6 @@
 package backend2.fakestoreapp.service.impl;
 
-import backend2.fakestoreapp.DTO.PurchaseDto;
+import backend2.fakestoreapp.DTO.PurchaseRegistrationDto;
 import backend2.fakestoreapp.model.Purchase;
 import backend2.fakestoreapp.repository.CustomerRepository;
 import backend2.fakestoreapp.repository.ProductRepository;
@@ -25,9 +25,9 @@ public class PurchaseServiceImpl implements PurchaseService {
         this.customerRepository = customerRepository;
     }
 
-    public void createPurchase(PurchaseDto purchaseDto, String email) {
+    public void createPurchase(PurchaseRegistrationDto purchaseRegistrationDto, String email) {
 
-        var product = productRepository.findByArticleId(purchaseDto.getProduct_article_id())
+        var product = productRepository.findByArticleId(purchaseRegistrationDto.getProduct_article_id())
                 .orElseThrow(() -> new NoSuchElementException("Product not found"));
 
         var customer = customerRepository.findByEmail(email)

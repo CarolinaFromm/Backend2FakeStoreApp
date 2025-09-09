@@ -5,7 +5,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class PurchaseDto {
+public class PurchaseRegistrationDto {
 
     private Long product_article_id;
     private LocalDateTime createdAt;
