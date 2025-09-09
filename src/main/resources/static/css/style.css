@@ -258,3 +258,26 @@ a:hover {
 .invalid-feedback {
     font-size: 0.9rem;
 }
+.role-btn {
+    border: 1px solid #ced4da;
+    border-radius: .375rem;
+    padding: 0.5rem 1rem;
+    background-color: #fff;
+    color: #495057;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.role-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #1CC88A;
+    color: #1CC88A;
+}
+
+.btn-check:checked + .role-btn {
+    background-color: #1CC88A;
+    color: #fff;
+    border-color: #1CC88A;
+    box-shadow: 0 0 0 0.2rem rgba(28, 200, 138, 0.25);
+}

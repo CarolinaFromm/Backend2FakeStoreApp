@@ -6,6 +6,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body class="container">
+
+<nav th:replace="navbar :: navbar"></nav>
+
 <h1>Mina ordrar</h1>
 
 <p th:if="${currentCustomer != null}">

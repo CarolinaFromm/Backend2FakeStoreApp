@@ -17,26 +17,7 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg custom-navbar">
-    <div class="container-fluid d-flex justify-content-between align-items-center">
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand mx-auto fs-3 fw-bold" th:href="@{/products}">FakeStore</a>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav gap-3">
-                <li class="nav-item">
-                    <a class="nav-link hover-link" th:href="@{/login}">Logga in</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link hover-link" th:href="@{/aboutUs}">Kontakta oss</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<nav th:replace="navbar :: navbar"></nav>
 
 <div class="container d-flex justify-content-center my-5">
     <div class="card auth-card shadow-lg p-4">
@@ -84,15 +65,15 @@
                      th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
             </div>
             <div class="mb-4">
-                <li class="role-row">
-                    <label class="radio">
-                        <input type="radio" th:field="*{role}" value="user"> Användare
-                    </label>
-                    <label class="radio">
-                        <input type="radio" th:field="*{role}" value="admin"> Admin
-                    </label>
-                    <p class="error" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></p>
-                </li>
+                <label class="form-label d-block">Roll</label>
+                <div class="btn-group w-100" role="group">
+                    <input type="radio" class="btn-check" th:field="*{role}" value="user" id="roleUser" autocomplete="off">
+                    <label class="btn role-btn w-50" for="roleUser">Användare</label>
+
+                    <input type="radio" class="btn-check" th:field="*{role}" value="admin" id="roleAdmin" autocomplete="off">
+                    <label class="btn role-btn w-50" for="roleAdmin">Admin</label>
+                </div>
+                <p class="error mt-2" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></p>
             </div>
             <button class="btn btn-primary w-100" type="submit">Skapa konto</button>
         </form>
