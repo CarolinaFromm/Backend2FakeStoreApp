@@ -24,7 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerResponseDTO register(CustomerRegistrationDTO dto) {
         String email = dto.getEmail().trim().toLowerCase();
-        if (customerRepository.existsByEmail(dto.getEmail())) {
+        if (customerRepository.existsByEmail(email)) {
             throw new IllegalArgumentException("E-postadressen är redan registrerad.");
         }
 
