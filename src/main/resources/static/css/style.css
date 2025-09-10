@@ -246,6 +246,32 @@ a:hover {
     font-weight: 700;
     color: var(--ink);
 }
+.authOrders-card {
+    max-width: 700px;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.authOrders-card h3 {
+    font-weight: 700;
+    color: var(--ink);
+}
+.confirm-card {
+    max-width: 700px;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--card);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: left;
+}
+.confirm-card h3 {
+    font-weight: 700;
+    color: var(--ink);
+    text-align: left;
+}
 .theme-input {
     border-radius: .6rem;
     border: 1px solid var(--border);

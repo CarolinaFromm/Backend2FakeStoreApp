@@ -14,34 +14,38 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 </head>
-<body class="container">
+<body>
 
 <nav th:replace="navbar :: navbar"></nav>
 
-<h1>Bekräfta order</h1>
+<div>
+    <div class="container d-flex justify-content-center my-5">
+        <div class="card confirm-card shadow-lg p-4">
+            <h3 class="text-center">Bekräfta order</h3>
+                <h5>Kunduppgifter</h5>
+                <p><strong>Namn:</strong> <span th:text="${customer.name}">Namn</span></p>
+                <p><strong>E-post:</strong> <span th:text="${customer.email}">email</span></p>
+                <p th:if="${customer.address}"><strong>Adress:</strong> <span th:text="${customer.address}">adress</span></p>
+                <p th:if="${customer.phone}"><strong>Telefon:</strong> <span th:text="${customer.phone}">tel</span></p>
 
-<div class="card" style="max-width:640px;margin:0 auto;text-align:left">
-    <h3>Kunduppgifter</h3>
-    <p><strong>Namn:</strong> <span th:text="${customer.name}">Namn</span></p>
-    <p><strong>E-post:</strong> <span th:text="${customer.email}">email</span></p>
-    <p th:if="${customer.address}"><strong>Adress:</strong> <span th:text="${customer.address}">adress</span></p>
-    <p th:if="${customer.phone}"><strong>Telefon:</strong> <span th:text="${customer.phone}">tel</span></p>
+                <hr/>
 
-    <hr/>
+                <h5>Produkt</h5>
+                <p><strong>Titel:</strong> <span th:text="${product.title}">Titel</span></p>
+                <p><strong>Pris:</strong> <span th:text="${product.price} + ' €'">0 kr</span></p>
 
-    <h3>Produkt</h3>
-    <p><strong>Titel:</strong> <span th:text="${product.title}">Titel</span></p>
-    <p><strong>Pris:</strong> <span th:text="${product.price} + ' €'">0 kr</span></p>
-
-    <form th:action="@{/confirm}" method="post" style="margin-top:16px">
-<!--        <input type="hidden" name="productId" th:value="${product.id}">-->
-        <input type="hidden" name="product_article_id" th:value="${product.articleId}">
-        <div style="display:flex; gap:12px;">
-            <a class="btn" th:href="@{/products}">Avbryt</a>
-            <button class="btn" type="submit">Bekräfta order</button>
+                <form th:action="@{/confirm}" method="post" style="margin-top:16px">
+                    <input type="hidden" name="product_article_id" th:value="${product.articleId}">
+                    <div style="display:flex; gap:12px;">
+                        <a class="btn btn-danger" th:href="@{/products}">Avbryt</a>
+                        <button class="btn" type="submit">Bekräfta order</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
+    </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>

@@ -18,7 +18,7 @@ public class AdminController {
     @PostMapping("/delete/{id}")
     public String deletePurchase (@PathVariable Long id) {
         purchaseServiceImpl.deletePurchase(id);
-        return "redirect:/orders";
+        return "redirect:/admin/orders";
     }
 
     @GetMapping("/orders")

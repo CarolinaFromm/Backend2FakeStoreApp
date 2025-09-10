@@ -18,7 +18,7 @@
 
 <div>
     <div class="container d-flex justify-content-center my-5">
-        <div class="card auth-card shadow-lg p-4">
+        <div class="card authOrders-card shadow-lg p-4">
             <h3 class="text-center">Alla ordrar</h3>
             <p th:if="${currentCustomer != null}">
                 Inloggad som <strong th:text="${currentCustomer.name}">Namn</strong>
@@ -34,6 +34,12 @@
                     <div class="title" th:text="${o.product.title}">Produkt</div>
                     <p class="price" th:text="${o.product.price} + ' kr'">0.00 kr</p>
                     <p>Beställd: <span th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd HH:mm')}">tid</span></p>
+                    <form class="mt-2 d-inline"
+                          th:action="@{/admin/delete/{id}(id=${o.id})}" method="post">
+                        <button type="submit" class="btn btn-primary"
+                                onclick="return confirm('Är du säker på att du vill ta bort ordern?');">Ta bort
+                        </button>
+                    </form>
                 </div>
             </div>
             <div class="mt-4">
