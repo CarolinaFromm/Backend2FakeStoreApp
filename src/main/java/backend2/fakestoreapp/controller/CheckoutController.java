@@ -1,15 +1,17 @@
 package backend2.fakestoreapp.controller;
 
+import backend2.fakestoreapp.DTO.PurchaseRegistrationDto;
 import backend2.fakestoreapp.model.Customer;
 import backend2.fakestoreapp.model.Product;
 import backend2.fakestoreapp.repository.CustomerRepository;
 import backend2.fakestoreapp.repository.ProductRepository;
-import backend2.fakestoreapp.service.PurchaseService;
+import backend2.fakestoreapp.service.impl.PurchaseServiceImpl;
 import org.springframework.ui.Model;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -18,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 public class CheckoutController {
 
-    private final PurchaseService purchaseService;
+    private final PurchaseServiceImpl purchaseService;
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
 
@@ -44,20 +46,19 @@ public class CheckoutController {
         return "checkout";
     }
 
-    @PostMapping("/orders/confirm")
-    public String confirm(@RequestParam("productId") Long productId,
-                          Authentication authentication,
-                          RedirectAttributes redirectAttributes) {
 
-        if (authentication == null || !authentication.isAuthenticated()) {
-            return "redirect:/login";
+    @PostMapping("/orders/confirm")
+    public String createPurchase(@ModelAttribute PurchaseRegistrationDto purchaseRegistrationDto,
+                                 Authentication authentication, RedirectAttributes redirectAttributes){
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            String email = authentication.getName();
+            purchaseService.createPurchase(purchaseRegistrationDto.getProduct_article_id(), email);
+            redirectAttributes.addFlashAttribute("message", "Order # " + "skapad");
+            return "redirect:/profile";
         }
 
-        String email = authentication.getName();
-        Long orderId = purchaseService.placeOrder(email, productId);
-
-        redirectAttributes.addFlashAttribute("message", "Order #" + orderId + "skapad.");
-        return "redirect:/profile";
+        return "redirect:/login";
     }
 
 }

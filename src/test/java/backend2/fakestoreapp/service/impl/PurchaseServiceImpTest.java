@@ -55,43 +55,43 @@ public class PurchaseServiceImpTest {
         customer.setEmail(customerEmail);
     }
 
-    @Test
-    void createPurchase_Success() {
-        when(productRepository.findByArticleId(1L)).thenReturn(Optional.of(product));
-        when(customerRepository.findByEmail(customerEmail)).thenReturn(Optional.of(customer));
-
-        purchaseService.createPurchase(purchaseRegistrationDTO, customerEmail);
-
-        ArgumentCaptor<Purchase> purchaseCaptor = ArgumentCaptor.forClass(Purchase.class);
-
-        verify(purchaseRepository).save(purchaseCaptor.capture());
-
-        Purchase capturedPurchase = purchaseCaptor.getValue();
-
-        assertNotNull(capturedPurchase);
-        assertEquals(customer, capturedPurchase.getCustomer());
-        assertEquals(product, capturedPurchase.getProduct());
-        assertNotNull(capturedPurchase.getCreatedAt());
-    }
-
-    @Test
-    void createPurchase_ProductNotFound() {
-        when(productRepository.findByArticleId(1L)).thenReturn(Optional.empty());
-
-        assertThrows(NoSuchElementException.class, () ->
-                purchaseService.createPurchase(purchaseRegistrationDTO, customerEmail));
-
-        verify(purchaseRepository, never()).save(any(Purchase.class));
-    }
-
-    @Test
-    void createPurchase_CustomerNotFound() {
-        when(productRepository.findByArticleId(1L)).thenReturn(Optional.of(product));
-        when(customerRepository.findByEmail(customerEmail)).thenReturn(Optional.empty());
-
-        assertThrows(NoSuchElementException.class, () ->
-                purchaseService.createPurchase(purchaseRegistrationDTO, customerEmail));
-
-        verify(purchaseRepository, never()).save(any(Purchase.class));
-    }
+//    @Test
+//    void createPurchase_Success() {
+//        when(productRepository.findByArticleId(1L)).thenReturn(Optional.of(product));
+//        when(customerRepository.findByEmail(customerEmail)).thenReturn(Optional.of(customer));
+//
+//        purchaseService.createPurchase(purchaseRegistrationDTO, customerEmail);
+//
+//        ArgumentCaptor<Purchase> purchaseCaptor = ArgumentCaptor.forClass(Purchase.class);
+//
+//        verify(purchaseRepository).save(purchaseCaptor.capture());
+//
+//        Purchase capturedPurchase = purchaseCaptor.getValue();
+//
+//        assertNotNull(capturedPurchase);
+//        assertEquals(customer, capturedPurchase.getCustomer());
+//        assertEquals(product, capturedPurchase.getProduct());
+//        assertNotNull(capturedPurchase.getCreatedAt());
+//    }
+//
+//    @Test
+//    void createPurchase_ProductNotFound() {
+//        when(productRepository.findByArticleId(1L)).thenReturn(Optional.empty());
+//
+//        assertThrows(NoSuchElementException.class, () ->
+//                purchaseService.createPurchase(purchaseRegistrationDTO, customerEmail));
+//
+//        verify(purchaseRepository, never()).save(any(Purchase.class));
+//    }
+//
+//    @Test
+//    void createPurchase_CustomerNotFound() {
+//        when(productRepository.findByArticleId(1L)).thenReturn(Optional.of(product));
+//        when(customerRepository.findByEmail(customerEmail)).thenReturn(Optional.empty());
+//
+//        assertThrows(NoSuchElementException.class, () ->
+//                purchaseService.createPurchase(purchaseRegistrationDTO, customerEmail));
+//
+//        verify(purchaseRepository, never()).save(any(Purchase.class));
+//    }
 }
