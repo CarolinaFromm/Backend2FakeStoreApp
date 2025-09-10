@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class OrderViewController {
     private final PurchaseServiceImpl purchaseService;
 
-    @GetMapping("/orders")
-    public String showOrders(Model model){
-        return "orders";
-    }
+//    @GetMapping("/orders")
+//    public String showOrders(Model model){
+//        return "orders";
+//    }
 }

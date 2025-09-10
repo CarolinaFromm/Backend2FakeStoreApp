@@ -28,7 +28,7 @@
         <p>Recensioner: <span th:text="${product.rating.count}">Count rating</span></p>
         <div style="display:flex; gap:10px; justify-content:center;">
             <!-- Lägg i varukorg -->
-            <a class="btn" th:href="@{|/orders/checkout?productId=${product.id}|}">Lägg order</a>
+            <a class="btn" th:href="@{|/checkout?productId=${product.id}|}">Lägg order</a>
             <a class="btn" th:href="@{/products}">Tillbaka</a>
         </div>
     </div>
