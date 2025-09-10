@@ -1,15 +1,31 @@
 package backend2.fakestoreapp.controller;
 
+import backend2.fakestoreapp.service.impl.PurchaseServiceImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-@Controller("/admin")
+@Controller
+@RequestMapping("/admin")
 public class AdminController {
 
-    @PostMapping("/delete")
-    public String deletePurchase () {
+    private final PurchaseServiceImpl purchaseServiceImpl;
 
-        return "deleted";
+    public AdminController(PurchaseServiceImpl purchaseServiceImpl) {
+        this.purchaseServiceImpl = purchaseServiceImpl;
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deletePurchase (@PathVariable Long id) {
+        purchaseServiceImpl.deletePurchase(id);
+        return "redirect:/orders";
+    }
+
+    @GetMapping("/orders")
+    public String getAllOrders (Model model){
+        var allOrders = purchaseServiceImpl.getAllOrders();
+        model.addAttribute("allOrders", allOrders);
+        return "orders";
     }
 
 }

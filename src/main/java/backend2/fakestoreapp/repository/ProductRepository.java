@@ -15,4 +15,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(value = "ALTER SEQUENCE product_id_seq RESTART WITH 1", nativeQuery = true)
     void resetAutoIncrement();
 
+    Optional<Product> findByArticleId(Long articleId);
 }

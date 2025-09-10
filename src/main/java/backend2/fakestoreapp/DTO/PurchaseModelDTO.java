@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PurchaseDTO {
+public class PurchaseModelDTO {
 
     private Long purchaseId;
     private Long productId;

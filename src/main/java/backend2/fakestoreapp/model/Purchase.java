@@ -11,26 +11,21 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Purchase {
-    @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "customer_id")
-    private Long customerId;
-
-    @Column(name = "product_article_id")
-    private Long productId;
 
     @Column(name = "created_at", updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-
     @ManyToOne
-    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+    @JoinColumn(name = "customer_id", updatable = false)
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name = "product_article_id", insertable = false, updatable = false)
+    @JoinColumn(name = "product_article_id", updatable = false)
     private Product product;
 
 }

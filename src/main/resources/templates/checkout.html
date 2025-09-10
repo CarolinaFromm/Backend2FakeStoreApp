@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="sv" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bekräfta order</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="container">
+
+<nav th:replace="navbar :: navbar"></nav>
+
+<h1>Bekräfta order</h1>
+
+<div class="card" style="max-width:640px;margin:0 auto;text-align:left">
+    <h3>Kunduppgifter</h3>
+    <p><strong>Namn:</strong> <span th:text="${customer.name}">Namn</span></p>
+    <p><strong>E-post:</strong> <span th:text="${customer.email}">email</span></p>
+    <p th:if="${customer.address}"><strong>Adress:</strong> <span th:text="${customer.address}">adress</span></p>
+    <p th:if="${customer.phone}"><strong>Telefon:</strong> <span th:text="${customer.phone}">tel</span></p>
+
+    <hr/>
+
+    <h3>Produkt</h3>
+    <p><strong>Titel:</strong> <span th:text="${product.title}">Titel</span></p>
+    <p><strong>Pris:</strong> <span th:text="${product.price} + ' €'">0 kr</span></p>
+
+    <form th:action="@{/orders/confirm}" method="post" style="margin-top:16px">
+<!--        <input type="hidden" name="productId" th:value="${product.id}">-->
+        <input type="hidden" name="product_article_id" th:value="${product.articleId}">
+        <div style="display:flex; gap:12px;">
+            <a class="btn" th:href="@{/products}">Avbryt</a>
+            <button class="btn" type="submit">Bekräfta order</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

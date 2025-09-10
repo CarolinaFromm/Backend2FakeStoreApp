@@ -1,0 +1,1 @@
+ALTER TABLE purchase DROP CONSTRAINT IF EXISTS purchase_product_article_id_fkey;

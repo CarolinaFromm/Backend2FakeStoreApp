@@ -16,5 +16,27 @@
 <body>
 <nav th:replace="~{navbar :: navbar}"></nav>
 
+<h1>Alla ordrar</h1>
+
+<p th:if="${currentCustomer != null}">
+    Inloggad som <strong th:text="${currentCustomer.name}">Namn</strong>
+    (<span th:text="${currentCustomer.email}">epost</span>)
+</p>
+
+<div th:if="${#lists.isEmpty(allOrders)}">
+    Det finns inga ordrar att titta på.
+</div>
+
+<div th:if="${!#lists.isEmpty(allOrders)}" class="grid">
+    <div class="card" th:each="o : ${allOrders}">
+        <div class="title" th:text="${o.product.title}">Produkt</div>
+        <p class="price" th:text="${o.product.price} + ' kr'">0.00 kr</p>
+        <p>Beställd: <span th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd HH:mm')}">tid</span></p>
+    </div>
+</div>
+
+<p style="margin-top:16px">
+    <a class="nav-link" th:href="@{/products}">&larr; Till produkterna</a>
+</p>
 </body>
 </html>
