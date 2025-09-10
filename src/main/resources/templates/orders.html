@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Produkter - Startsida</title>
+    <title>Admin - Orders</title>
     <link rel="icon" href="Bild.png">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
@@ -13,26 +13,34 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
-<body class="container">
+<body>
 
 <nav th:replace="navbar :: navbar"></nav>
 
-<h1>Alla ordrar</h1>
+<div>
+    <div class="container d-flex justify-content-center my-5">
+        <div class="card auth-card shadow-lg p-4">
+            <h3 class="text-center">Mina ordrar</h3>
+            <p th:if="${currentCustomer != null}">
+                Inloggad som <strong th:text="${currentCustomer.name}">Namn</strong>
+                (<span th:text="${currentCustomer.email}">epost</span>)
+            </p>
 
-<p th:if="${currentCustomer != null}">
-    Inloggad som <strong th:text="${currentCustomer.name}">Namn</strong>
-    (<span th:text="${currentCustomer.email}">epost</span>)
-</p>
+            <div th:if="${#lists.isEmpty(allOrders)}">
+                Du har inga ordrar ännu.
+            </div>
 
-<div th:if="${#lists.isEmpty(allOrders)}">
-    Det finns inga ordrar att titta på.
-</div>
-
-<div th:if="${!#lists.isEmpty(allOrders)}" class="grid">
-    <div class="card" th:each="o : ${allOrders}">
-        <div class="title" th:text="${o.product.title}">Produkt</div>
-        <p class="price" th:text="${o.product.price} + ' kr'">0.00 kr</p>
-        <p>Beställd: <span th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd HH:mm')}">tid</span></p>
+            <div th:if="${!#lists.isEmpty(allOrders)}" class="grid">
+                <div class="card" th:each="o : ${allOrders}">
+                    <div class="title" th:text="${o.product.title}">Produkt</div>
+                    <p class="price" th:text="${o.product.price} + ' kr'">0.00 kr</p>
+                    <p>Beställd: <span th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd HH:mm')}">tid</span></p>
+                </div>
+            </div>
+            <div class="mt-4">
+                <a class="btn btn-primary" th:href="@{/products}">Tillbaka</a>
+            </div>
+        </div>
     </div>
 </div>
 

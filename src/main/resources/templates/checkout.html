@@ -24,7 +24,7 @@
     <p><strong>Titel:</strong> <span th:text="${product.title}">Titel</span></p>
     <p><strong>Pris:</strong> <span th:text="${product.price} + ' €'">0 kr</span></p>
 
-    <form th:action="@{/orders/confirm}" method="post" style="margin-top:16px">
+    <form th:action="@{/confirm}" method="post" style="margin-top:16px">
 <!--        <input type="hidden" name="productId" th:value="${product.id}">-->
         <input type="hidden" name="product_article_id" th:value="${product.articleId}">
         <div style="display:flex; gap:12px;">

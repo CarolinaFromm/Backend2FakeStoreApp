@@ -24,7 +24,7 @@ public class CheckoutController {
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
 
-    @GetMapping("/orders/checkout")
+    @GetMapping("/checkout")
     public String checkout(@RequestParam("productId") Long productId,
                            Authentication authentication,
                            Model model) {
@@ -47,7 +47,7 @@ public class CheckoutController {
     }
 
 
-    @PostMapping("/orders/confirm")
+    @PostMapping("/confirm")
     public String createPurchase(@ModelAttribute PurchaseRegistrationDto purchaseRegistrationDto,
                                  Authentication authentication, RedirectAttributes redirectAttributes){
 
