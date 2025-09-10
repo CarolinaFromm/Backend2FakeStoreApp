@@ -18,28 +18,40 @@
 
 <nav th:replace="~{navbar :: navbar}"></nav>
 
-<div>
-    <div class="container d-flex justify-content-center my-5">
-        <div class="card auth-card shadow-lg p-4">
-            <h3 class="text-center">Mina ordrar</h3>
-            <p th:if="${currentCustomer != null}">
-                Inloggad som <strong th:text="${currentCustomer.name}">Namn</strong>
-                (<span th:text="${currentCustomer.email}">epost</span>)
-            </p>
-
-            <div th:if="${#lists.isEmpty(orders)}">
-                Du har inga ordrar ännu.
+<div class="container my-5">
+    <div class="mt-4 mb-5">
+        <a class="btn btn-primary" th:href="@{/products}">Tillbaka</a>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <div class="card auth-card shadow-lg p-4">
+                <h3 class="text-center">Kunduppgifter</h3>
+                <p><strong>Namn:</strong> <span th:text="${currentCustomer.name}">Namn</span></p>
+                <p><strong>E-post:</strong> <span th:text="${currentCustomer.email}">email</span></p>
+                <p th:if="${currentCustomer.address}"><strong>Adress:</strong> <span th:text="${currentCustomer.address}">adress</span></p>
+                <p th:if="${currentCustomer.phone}"><strong>Telefon:</strong> <span th:text="${currentCustomer.phone}">tele</span></p>
             </div>
+        </div>
+        <div class="col">
+            <div class="card auth-card shadow-lg p-4">
+                <h3 class="text-center">Mina ordrar</h3>
+                <p th:if="${currentCustomer != null}">
+                    Inloggad som <strong th:text="${currentCustomer.name}">Namn</strong>
+                    (<span th:text="${currentCustomer.email}">epost</span>)
+                </p>
 
-            <div th:if="${!#lists.isEmpty(orders)}" class="grid">
-                <div class="card" th:each="o : ${orders}">
-                    <div class="title" th:text="${o.product.title}">Produkt</div>
-                    <p class="price" th:text="${o.product.price} + ' €'">0.00 €</p>
-                    <p>Beställd: <span th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd HH:mm')}">tid</span></p>
+                <div th:if="${#lists.isEmpty(orders)}">
+                    Du har inga ordrar ännu.
                 </div>
-            </div>
-            <div class="mt-4">
-                <a class="btn btn-primary" th:href="@{/products}">Tillbaka</a>
+
+                <div th:if="${!#lists.isEmpty(orders)}" class="row row-cols-1 g-3">
+                    <div class="col" th:each="o : ${orders}">
+                        <div class="title" th:text="${o.product.title}">Produkt</div>
+                        <p class="price" th:text="${o.product.price} + ' €'">0.00 €</p>
+                        <p>Beställd: <span th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd HH:mm')}">tid</span></p>
+                        <hr>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
