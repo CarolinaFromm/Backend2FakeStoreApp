@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<nav th:replace="navbar :: navbar"></nav>
+<nav th:replace="~{navbar :: navbar}"></nav>
 
 <main class="container">
     <div class="card" style="max-width: 640px; margin: 0 auto;">
@@ -24,9 +24,9 @@
         <p th:text="${product.description}">Beskrivning</p>
 
         <p><span th:text="${product.price}">0.00</span> €</p>
-
+        <div class="rating-stars" th:style="'--rating: ' + ${product.rating.rate}"></div>
+        <p>Recensioner: <span th:text="${product.rating.count}">Count rating</span></p>
         <div style="display:flex; gap:10px; justify-content:center;">
-            <!-- Lägg i varukorg -->
             <a class="btn" th:href="@{/orders}">Lägg order</a>
             <a class="btn" th:href="@{/products}">Tillbaka</a>
         </div>
