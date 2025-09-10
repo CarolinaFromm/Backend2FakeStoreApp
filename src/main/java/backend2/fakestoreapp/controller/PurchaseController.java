@@ -22,10 +22,10 @@ public class PurchaseController {
         if (authentication != null && authentication.isAuthenticated()) {
             String email = authentication.getName();
             purchaseServiceImpl.createPurchase(purchaseRegistrationDto, email);
-            return "baught";
+            return "redirect:/profile";
         }
-        
-        return "redirect:/checkout";
+
+        return "redirect:/products";
     }
 
 

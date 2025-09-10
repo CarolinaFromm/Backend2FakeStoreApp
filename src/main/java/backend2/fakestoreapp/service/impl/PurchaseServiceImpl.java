@@ -7,8 +7,10 @@ import backend2.fakestoreapp.repository.ProductRepository;
 import backend2.fakestoreapp.repository.PurchaseRepository;
 import backend2.fakestoreapp.service.PurchaseService;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -42,5 +44,13 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     public void deletePurchase(Long id) {
         purchaseRepository.deleteById(id);
+    }
+
+    public List<Purchase> getOrdersByCustomerEmail (String email){
+        return purchaseRepository.findByCustomerEmailOrderByCreatedAtDesc(email);
+    }
+
+    public List<Purchase> getAllOrders() {
+        return purchaseRepository.findAll();
     }
 }

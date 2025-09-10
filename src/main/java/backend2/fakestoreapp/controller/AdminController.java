@@ -2,13 +2,15 @@ package backend2.fakestoreapp.controller;
 
 import backend2.fakestoreapp.DTO.PurchaseDeleteDTO;
 import backend2.fakestoreapp.service.impl.PurchaseServiceImpl;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
-//@RequestMapping("/admin")
+@RequestMapping("/admin")
 public class AdminController {
 
     private final PurchaseServiceImpl purchaseServiceImpl;
@@ -17,10 +19,17 @@ public class AdminController {
         this.purchaseServiceImpl = purchaseServiceImpl;
     }
 
-    @PostMapping("/admin/delete")
-    public String deletePurchase (@ModelAttribute("purchase") PurchaseDeleteDTO purchaseDeleteDTO) {
-        purchaseDeleteDTO.getPurchaseIds().forEach(id -> purchaseServiceImpl.deletePurchase(id));
-        return "deleted";
+    @PostMapping("/delete/{id}")
+    public String deletePurchase (@PathVariable Long id) {
+        purchaseServiceImpl.deletePurchase(id);
+        return "redirect:/orders";
+    }
+
+    @GetMapping("/orders")
+    public String getAllOrders (Model model){
+        var allOrders = purchaseServiceImpl.getAllOrders();
+        model.addAttribute("allOrders", allOrders);
+        return "orders";
     }
 
 }
