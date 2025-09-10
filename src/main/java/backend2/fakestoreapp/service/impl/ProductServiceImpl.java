@@ -60,9 +60,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void saveProductsFromFakeStore() {
-//        if (productRepository.count() > 0) {
-//            return;
-//        }
 
         productRepository.deleteAll();
         productRepository.resetAutoIncrement();
