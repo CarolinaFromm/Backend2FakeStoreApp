@@ -34,7 +34,7 @@
             <div th:if="${!#lists.isEmpty(orders)}" class="grid">
                 <div class="card" th:each="o : ${orders}">
                     <div class="title" th:text="${o.product.title}">Produkt</div>
-                    <p class="price" th:text="${o.product.price} + ' kr'">0.00 kr</p>
+                    <p class="price" th:text="${o.product.price} + ' kr'">0.00 €</p>
                     <p>Beställd: <span th:text="${#temporals.format(o.createdAt, 'yyyy-MM-dd HH:mm')}">tid</span></p>
                 </div>
             </div>
