@@ -1,5 +1,9 @@
 
-<nav class="navbar navbar-expand-lg custom-navbar" th:fragment="navbar">
+<nav class="navbar navbar-expand-lg custom-navbar"
+     th:fragment="navbar"
+     xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
     <div class="container-fluid d-flex justify-content-between align-items-center">
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -12,10 +16,17 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav gap-3">
 
+                <!-- ENDAST ADMIN SER DETTA -->
+                <li class="nav-item" sec:authorize="hasRole('admin')">
+                    <a class="nav-link hover-link" th:href="@{/admin/orders}">Hantera Ordrar</a>
+                </li>
+
+                <!-- INTE INLOGGAD -->
                 <li class="nav-item" th:if="${currentCustomer == null}">
                     <a class="nav-link hover-link" th:href="@{/login}">Logga in</a>
                 </li>
 
+                <!-- INLOGGAD -->
                 <li class="nav-item" th:if="${currentCustomer != null}">
                     <a class="nav-link hover-link" th:href="@{/profile}"
                        th:text="${currentCustomer.name}">Profil</a>
@@ -26,6 +37,7 @@
                     </form>
                 </li>
 
+                <!-- ALLTID SYNLIG  -->
                 <li class="nav-item">
                     <a class="nav-link hover-link" th:href="@{/aboutUs}">Kontakta oss</a>
                 </li>

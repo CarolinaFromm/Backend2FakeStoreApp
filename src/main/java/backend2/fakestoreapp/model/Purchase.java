@@ -11,7 +11,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Purchase {
-    @Id @GeneratedValue (strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "customer_id")
@@ -23,7 +25,6 @@ public class Purchase {
     @Column(name = "created_at", updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
-
 
     @ManyToOne
     @JoinColumn(name = "customer_id", insertable = false, updatable = false)
