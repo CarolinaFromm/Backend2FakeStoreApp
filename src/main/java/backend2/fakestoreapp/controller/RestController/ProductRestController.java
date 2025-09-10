@@ -1,7 +1,6 @@
-package backend2.fakestoreapp.controller;
+package backend2.fakestoreapp.controller.RestController;
 
 import backend2.fakestoreapp.DTO.ProductDTO;
-import backend2.fakestoreapp.service.FakeStoreClient;
 import backend2.fakestoreapp.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -15,9 +14,9 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
-public class ProductController {
+public class ProductRestController {
 
-    private static final Logger log = LoggerFactory.getLogger(ProductController.class);
+    private static final Logger log = LoggerFactory.getLogger(ProductRestController.class);
     private final ProductService productService;
 
     @GetMapping("/products")

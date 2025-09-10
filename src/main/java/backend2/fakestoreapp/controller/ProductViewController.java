@@ -1,6 +1,7 @@
-package backend2.fakestoreapp.ViewController;
+package backend2.fakestoreapp.controller;
 
-import backend2.fakestoreapp.service.ProductService;
+
+import backend2.fakestoreapp.service.impl.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 public class ProductViewController {
 
-    private final ProductService productService;
+    private final ProductServiceImpl productService;
 
     @GetMapping("/products")
     public String showProducts(Model model) {
@@ -23,8 +24,5 @@ public class ProductViewController {
         model.addAttribute("product", productService.getProductById(id));
         return "showProduct";
     }
-    @GetMapping("/aboutUs")
-    public String showAboutUs(Model model) {
-        return "aboutUs";
-    }
+
 }
